@@ -1,4 +1,6 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+<% end %>
 
 <p>
   <b>Name:</b>
@@ -20,6 +22,6 @@
   <%= @order.pay_type %>
 </p>
 
-
+<%= button_to 'Check shipped', @order, method: :put, confirm: 'Check order as shipped?' %>
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

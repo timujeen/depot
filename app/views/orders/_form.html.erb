@@ -27,7 +27,9 @@
     <%= f.label :pay_type %><br />
     <%= f.select :pay_type, Order::PAYMENT_TYPES, prompt: 'Select a payment method' %>
   </div>
+  <% if current_page?(new_order_path) %>
   <div class="actions">
     <%= f.submit 'Place order' %>
   </div>
+  <% end %>
 <% end %>

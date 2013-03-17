@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+    skip_before_filter :authorize, only: [:new, :create]
+
   # GET /orders
   # GET /orders.json
   def index
@@ -70,10 +72,12 @@ class OrdersController < ApplicationController
   # PUT /orders/1.json
   def update
     @order = Order.find(params[:id])
+    @order.ship_date = Date.today
 
     respond_to do |format|
       if @order.update_attributes(params[:order])
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        OrderNotifier.shipped(@order).deliver
+        format.html { redirect_to orders_url, notice: "Order checked as shipped on #{@order.ship_date}" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

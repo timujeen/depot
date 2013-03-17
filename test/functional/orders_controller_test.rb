@@ -41,7 +41,7 @@ class OrdersControllerTest < ActionController::TestCase
 
   test "should update order" do
     put :update, id: @order, order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type }
-    assert_redirected_to @order
+    assert_redirected_to orders_path
   end
 
   test "should destroy order" do
